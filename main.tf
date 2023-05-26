@@ -9,8 +9,6 @@ terraform {
     }
   }
   required_version = ">= 1.2.0"
-
-  
 }
 
 
@@ -18,11 +16,11 @@ terraform {
 
 provider "aws" {  
 
-  region = "ap-northeast-1"
+  region = var.aws_region
   # access_key = var.secrets.AWS_ACCESS_KEY
   # secret_key = var.secrets.AWS_SECRET_KEY
-  access_key = var.AWS_ACCESS_KEY
-  secret_key = var.AWS_SECRET_KEY
+  access_key = var.aws_access_key
+  secret_key = var.aws_secret_key
 }
 
 module "dynamodb" {
@@ -31,7 +29,9 @@ module "dynamodb" {
 module "iam" {
   source = "./iam"
 }
-
+module "lambda" {
+  source = "./lambda"
+}
 
 
 
