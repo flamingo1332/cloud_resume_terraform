@@ -1,9 +1,9 @@
-output "cloud_resume_visitor_table_name" {
-  description = "visitor table name"
-  value = aws_dynamodb_table.cloud_resume_visitor.name
+output "dynamodb_visitor_table_name" {
+  description = "dynamodb visitor table name"
+  value = aws_dynamodb_table.visitor_table.name
 }
 
-output "cloud_resume_ip_table_name" {
-  description = "ip table name"
-  value = aws_dynamodb_table.cloud_resume_ip.name
+output "dynamodb_ip_table_name" {
+  description = "dynamodb ip table name"
+  value = aws_dynamodb_table.ip_table.name
 }

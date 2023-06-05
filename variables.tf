@@ -10,5 +10,16 @@ variable "aws_secret_key" {
 
 variable "aws_region" {
   type        = string
-  description = "AWS secret key"
+  description = "AWS default region"
 }
+
+
+# s3 bucket url
+# iam role
+# db name (as env variable)
+# lambda arn
+# sns_topic_arn
+
+
+
+

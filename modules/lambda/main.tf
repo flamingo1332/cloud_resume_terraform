@@ -1,26 +1,45 @@
+data "aws_s3_object" "script_visitor" {
+  bucket = var.s3_bucket_backend
+  key    = "visitor.py"
+}
 
-resource "aws_lambda_function" "cloud_resume_visitor" {
-  function_name    = "cloud_resume_visitor"
-  role             = aws_iam_role.lambda_role.arn
-  handler          = "visitor.lambda_handler"
-  runtime          = "python3.10"
-  architecture     = "arm64"
-  source_code_hash = filebase64sha256("github.com/flamingo1332/cloud_resume_code/backend/visitor.py")
+data "aws_s3_object" "script_slack_notification" {
+  bucket = var.s3_bucket_backend
+  key    = "slack_notification.py"
+}
+
+resource "null_resource" "example" {
+  triggers = {
+    visitor_script_exists          = data.aws_s3_object.script_visitor.key != null
+    slack_notification_script_exists = data.aws_s3_object.script_slack_notification.key != null
+  }
+
+  // ... Other configuration for the null_resource
+}
+
+resource "aws_lambda_function" "lambda_visitor" {
+  function_name = var.lambda_visitor_name
+  runtime       = "python3.10"
+  handler       = "visitor.lambda_handler"
+  role          = var.iam_role_lambda_arn
+  # filename      = data.aws_s3_object.script_visitor.key != null ? "s3://${data.aws_s3_object.script_visitor.bucket}/${data.aws_s3_object.script_visitor.key}" : ""
+  filename = ""
   environment {
     variables = {
-      table_visitor = "cloud_resume_visitor"
-      table_ip = "cloud_resume_ip"
+      table_visitor = var.dynamodb_visitor_table_name
+      table_ip = var.dynamodb_ip_table_name
     }
   }
 }
 
-
-
-resource "aws_lambda_function" "cloud_resume_slack_notification" {
-  function_name    = "cloud_resume_slack_notification"
-  role             = aws_iam_role.lambda_role.arn
-  handler          = "slack_notification.lambda_handler"
-  runtime          = "python3.10"
-  architecture     = "arm64"
-  source_code_hash = filebase64sha256("github.com/flamingo1332/cloud_resume_code/backend/slack_notification.py")
+resource "aws_lambda_function" "lambda_slack_notification" {
+  function_name    = var.lambda_slack_notification_name
+  runtime       = "python3.10"
+  handler       = "slack_notification.lambda_handler"
+  role          = var.iam_role_lambda_arn
+  # filename      = data.aws_s3_object.script_slack_notification.key != null ? "s3://${data.aws_s3_object.script_slack_notification.bucket}/${data.aws_s3_object.script_slack_notification.key}" : ""
+  filename = ""
 }
+
+
+

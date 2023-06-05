@@ -1,12 +1,15 @@
-# 1
-resource "aws_dynamodb_table" "cloud_resume_visitor" {
-  name         = "cloud_resume_visitor"
+resource "aws_dynamodb_table" "visitor_table" {
+  name         = var.visitor_table_name
   billing_mode = "PAY_PER_REQUEST"
-
+  hash_key     = "visitor"
   attribute {
-    name = "pk"
+    name = "visitor"
     type = "S"
   }
+  # attribute {
+  #     name = "count"
+  #     type = "N"
+  #   }
 
   ttl {
     attribute_name = "ttl"
@@ -18,25 +21,31 @@ resource "aws_dynamodb_table" "cloud_resume_visitor" {
   }
 }
 
-# prepopulate
-resource "aws_dynamodb_table_item" "visitor_count_initial_item" {
-  table_name = aws_dynamodb_table.visitor_count.name
-  hash_key   = "pk"
-  range_key  = ""
-
-  item = {
-    pk    = "visitor"
-    value = 0
+resource "aws_dynamodb_table_item" "visitor_table_initial_item" {
+  table_name = aws_dynamodb_table.visitor_table.name
+  hash_key   = aws_dynamodb_table.visitor_table.hash_key
+  item = <<ITEM
+  {
+    "visitor": {"S": "visitor"},
+    "count": {"N": "0"}
   }
+  ITEM
 }
+#   item = <<ITEM
+# {
+#       "visitor" = {"S": "visitor"},
+#       "count" = {"N": "0"}
+#   }
+# ITEM
+# }
 
 
 
-# 2
-resource "aws_dynamodb_table" "cloud_resume_ip" {
-  name         = "cloud_resume_ip"
+resource "aws_dynamodb_table" "ip_table" {
+  name         = var.ip_table_name
   billing_mode = "PAY_PER_REQUEST"
-
+  hash_key     = "ip"
+  
   attribute {
     name = "ip"
     type = "S"
