@@ -1,21 +1,21 @@
-terraform {
-  # required_providers {
-  #   aws = {
-  #     source  = "hashicorp/aws"
-  #     version = "~> 5.1.0"
-  #   }
-  # }
+# terraform {
+#   required_providers {
+#     aws = {
+#       source  = "hashicorp/aws"
+#       version = "~> 5.1.0"
+#     }
+#   }
 
-  cloud {
-    organization = "ksw29555_personal_project"
-    hostname     = "app.terraform.io"
+#   cloud {
+#     organization = "ksw29555_personal_project"
+#     hostname     = "app.terraform.io"
 
-    workspaces {
-      name = "cloud_resume"
-    }
-  }
-  required_version = ">= 1.2.0"
-}
+#     workspaces {
+#       name = "cloud_resume"
+#     }
+#   }
+#   required_version = ">= 1.2.0"
+# }
 
 
 
