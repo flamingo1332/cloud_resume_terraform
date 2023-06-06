@@ -8,7 +8,7 @@ terraform {
 
   cloud {
     organization = "ksw29555_personal_project"
-    hostname = "app.terraform.io"
+    hostname     = "app.terraform.io"
 
     workspaces {
       name = "cloud_resume"
@@ -20,7 +20,7 @@ terraform {
 
 
 
-provider "aws" {  
+provider "aws" {
 
   region = "ap-northeast-1"
   # region = var.aws_region
@@ -44,24 +44,24 @@ module "s3" {
 # iam role
 # db name (as env variable)
 module "lambda" {
-  source = "./modules/lambda"
-  s3_bucket_backend = module.s3.s3_bucket_backend
-  iam_role_lambda_arn = module.iam.iam_role_lambda_arn
+  source                      = "./modules/lambda"
+  s3_bucket_backend           = module.s3.s3_bucket_backend
+  iam_role_lambda_arn         = module.iam.iam_role_lambda_arn
   dynamodb_visitor_table_name = module.dynamodb.dynamodb_visitor_table_name
-  dynamodb_ip_table_name = module.dynamodb.dynamodb_ip_table_name
+  dynamodb_ip_table_name      = module.dynamodb.dynamodb_ip_table_name
 }
 
 
 # lambda arn (visitor)
 module "apigateway" {
-  source = "./modules/apigateway"
+  source             = "./modules/apigateway"
   lambda_visitor_arn = module.lambda.lambda_visitor_arn
 
 }
 
 # lambda arn (slack_notification)
 module "sns_topic" {
-  source = "./modules/sns_topic"
+  source                        = "./modules/sns_topic"
   lambda_slack_notificatino_arn = module.lambda.lambda_slack_notification_arn
 }
 
@@ -70,10 +70,10 @@ module "sns_topic" {
 # apigateway stage
 # sns_topic_arn
 module "cloudwatch" {
-  source = "./modules/cloudwatch"
-  sns_topic_arn = module.sns_topic.sns_topic_arn
-  lambda_visitor_arn = module.lambda.lambda_visitor_arn
-  apigateway_arn = module.apigateway.apigateway_arn
+  source               = "./modules/cloudwatch"
+  sns_topic_arn        = module.sns_topic.sns_topic_arn
+  lambda_visitor_arn   = module.lambda.lambda_visitor_arn
+  apigateway_arn       = module.apigateway.apigateway_arn
   apigateway_stage_arn = module.apigateway.apigateway_stage_arn
 }
 
