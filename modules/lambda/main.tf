@@ -1,21 +1,13 @@
-data "aws_s3_object" "script_visitor" {
-  bucket = var.s3_bucket_backend
-  key    = "visitor.py"
-}
+# data "aws_s3_object" "script_visitor" {
+#   bucket = var.s3_bucket_backend
+#   key    = "visitor.py"
+# }
 
-data "aws_s3_object" "script_slack_notification" {
-  bucket = var.s3_bucket_backend
-  key    = "slack_notification.py"
-}
+# data "aws_s3_object" "script_slack_notification" {
+#   bucket = var.s3_bucket_backend
+#   key    = "slack_notification.py"
+# }
 
-resource "null_resource" "example" {
-  triggers = {
-    visitor_script_exists          = data.aws_s3_object.script_visitor.key != null
-    slack_notification_script_exists = data.aws_s3_object.script_slack_notification.key != null
-  }
-
-  // ... Other configuration for the null_resource
-}
 
 resource "aws_lambda_function" "lambda_visitor" {
   function_name = var.lambda_visitor_name
