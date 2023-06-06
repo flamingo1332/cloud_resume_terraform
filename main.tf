@@ -1,4 +1,10 @@
 terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 5.1.0"
+    }
+  }
 
   cloud {
     organization = "ksw29555_personal_project"
@@ -16,9 +22,10 @@ terraform {
 
 provider "aws" {  
 
-  region = var.aws_region
-  access_key = var.aws_access_key
-  secret_key = var.aws_secret_key
+  region = "ap-northeast-1"
+  # region = var.aws_region
+  # access_key = var.aws_access_key
+  # secret_key = var.aws_secret_key
 }
 
 module "dynamodb" {
