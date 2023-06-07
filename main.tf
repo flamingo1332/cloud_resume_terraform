@@ -1,21 +1,20 @@
-# terraform {
-#   required_providers {
-#     aws = {
-#       source  = "hashicorp/aws"
-#       version = "~> 5.1.0"
-#     }
-#   }
+terraform {
+  # required_providers {
+  #   aws = {
+  #     source  = "hashicorp/aws"
+  #     version = "~> 5.1.0"
+  #   }
+  # }
 
-#   cloud {
-#     organization = "ksw29555_personal_project"
-#     hostname     = "app.terraform.io"
+  cloud {
+    organization = "ksw29555_personal_project"
 
-#     workspaces {
-#       name = "cloud_resume"
-#     }
-#   }
-#   required_version = ">= 1.2.0"
-# }
+    workspaces {
+      name = "cloud_resume"
+    }
+  }
+  required_version = ">= 1.2.0"
+}
 
 
 
@@ -24,8 +23,8 @@ provider "aws" {
 
   region = "ap-northeast-1"
   # region = var.aws_region
-  # access_key = var.aws_access_key
-  # secret_key = var.aws_secret_key
+  access_key = var.aws_access_key
+  secret_key = var.aws_secret_key
 }
 
 module "dynamodb" {

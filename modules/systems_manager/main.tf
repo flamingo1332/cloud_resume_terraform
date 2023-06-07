@@ -3,5 +3,5 @@ resource "aws_ssm_parameter" "webhook" {
   description = "slackwebhookurl for notification"
   type        = "String"
   value       = "my_value"
-  
+  overwrite   = true
 }
