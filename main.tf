@@ -1,31 +1,41 @@
 terraform {
-  # required_providers {
-  #   aws = {
-  #     source  = "hashicorp/aws"
-  #     version = "~> 5.1.0"
-  #   }
-  # }
 
-  cloud {
-    organization = "ksw29555_personal_project"
-
-    workspaces {
-      name = "cloud_resume"
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 5.1.0"
     }
   }
-  required_version = ">= 1.2.0"
+
+  backend "s3" {
+    bucket         = "ksw29555-terraform-backend"
+    key            = "terraform/main.tfstate"
+    region         = "ap-northeast-1"
+    encrypt        = true
+    dynamodb_table = "cloud_resume_terraform_lock"
+  }
+
+  # cloud {
+  #   organization = "ksw29555_personal_project"
+
+  #   workspaces {
+  #     name = "cloud_resume"
+  #   }
+  # }
+  # required_version = ">= 1.2.0"
 }
-
-
 
 
 provider "aws" {
 
-  region = "ap-northeast-1"
-  # region = var.aws_region
+  region = var.aws_region
   access_key = var.aws_access_key
   secret_key = var.aws_secret_key
 }
+
+# module "backend" {
+#   source = "./modules/backend"
+# }
 
 module "dynamodb" {
   source = "./modules/dynamodb"

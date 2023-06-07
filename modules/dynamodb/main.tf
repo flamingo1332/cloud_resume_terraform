@@ -6,10 +6,6 @@ resource "aws_dynamodb_table" "visitor_table" {
     name = "visitor"
     type = "S"
   }
-  # attribute {
-  #     name = "count"
-  #     type = "N"
-  #   }
 
   ttl {
     attribute_name = "ttl"
@@ -21,6 +17,7 @@ resource "aws_dynamodb_table" "visitor_table" {
   }
 }
 
+
 resource "aws_dynamodb_table_item" "visitor_table_initial_item" {
   table_name = aws_dynamodb_table.visitor_table.name
   hash_key   = aws_dynamodb_table.visitor_table.hash_key
@@ -31,14 +28,6 @@ resource "aws_dynamodb_table_item" "visitor_table_initial_item" {
   }
   ITEM
 }
-#   item = <<ITEM
-# {
-#       "visitor" = {"S": "visitor"},
-#       "count" = {"N": "0"}
-#   }
-# ITEM
-# }
-
 
 
 resource "aws_dynamodb_table" "ip_table" {
