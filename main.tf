@@ -15,14 +15,7 @@ terraform {
     dynamodb_table = "cloud_resume_terraform_lock"
   }
 
-  # cloud {
-  #   organization = "ksw29555_personal_project"
 
-  #   workspaces {
-  #     name = "cloud_resume"
-  #   }
-  # }
-  # required_version = ">= 1.2.0"
 }
 
 
