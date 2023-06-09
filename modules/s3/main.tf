@@ -41,9 +41,6 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "frontend_bucket_s
 }
 
 
-
-
-
 # frontend static website hosting
 resource "aws_s3_bucket_website_configuration" "frontend_bucket_website" {
   bucket = aws_s3_bucket.frontend_bucket.id
@@ -53,7 +50,7 @@ resource "aws_s3_bucket_website_configuration" "frontend_bucket_website" {
   }
 
   error_document {
-    key = "error.html"
+    key = "index.html"
   }
 }
 
@@ -62,6 +59,9 @@ resource "aws_s3_bucket_policy" "frontend_bucket_policy" {
   policy = var.s3_bucket_policy_frontend
   
 }
+
+
+
 
 
 

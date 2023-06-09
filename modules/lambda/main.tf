@@ -1,14 +1,3 @@
-
-# data "aws_s3_object" "script_visitor" {
-#   bucket = var.s3_bucket_backend
-#   key    = "visitor.zip"
-# }
-# data "aws_s3_object" "script_slack_notification" {
-#   bucket = var.s3_bucket_backend
-#   key    = "slack_notification.py"
-# }
-
-
 resource "aws_lambda_function" "lambda_visitor" {
   function_name = var.lambda_visitor_name
   runtime       = "python3.10"
