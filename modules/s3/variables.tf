@@ -17,16 +17,16 @@ variable "s3_bucket_policy_frontend" {
   type        = string
   default     = <<EOF
 {
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Effect": "Allow",
-      "Principal": "*",
-      "Action": "s3:GetObject",
-      "Resource": "arn:aws:s3:::ksw29555-cloud-resume-frontend/*"
-      
-    }
-  ]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "Statement1",
+            "Effect": "Allow",
+            "Principal": "*",
+            "Action": "s3:GetObject",
+            "Resource": "arn:aws:s3:::ksw29555-cloud-resume-frontend/*"
+        }
+    ]
 }
 EOF
 }
