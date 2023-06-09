@@ -29,19 +29,19 @@ variable "lambda_slack_notification_name" {
 
 variable "s3_bucket_backend" {
   description = "s3 bucket for backend code"
-  type = string
+  type        = string
 }
 
 variable "iam_role_lambda_arn" {
   description = "arn of iam lambda role"
-  type = string
+  type        = string
 }
 
 variable "dynamodb_visitor_table_name" {
   description = "table name of visitor dynamodb table"
-  type = string
+  type        = string
 }
 variable "dynamodb_ip_table_name" {
   description = "table name of ip dynamodb table"
-  type = string
+  type        = string
 }
