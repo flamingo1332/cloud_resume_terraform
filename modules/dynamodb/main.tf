@@ -7,10 +7,10 @@ resource "aws_dynamodb_table" "visitor_table" {
     type = "S"
   }
 
-  ttl {
-    attribute_name = "ttl"
-    enabled        = false
-  }
+  # ttl {
+  #   attribute_name = "ttl"
+  #   enabled        = false
+  # }
 
   tags = {
     Name = "CloudResumeVisitor"

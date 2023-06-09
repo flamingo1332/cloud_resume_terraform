@@ -65,9 +65,6 @@ resource "aws_s3_bucket_policy" "frontend_bucket_policy" {
 
 
 
-
-
-
 # backend bucket
 resource "aws_s3_bucket" "backend_bucket" {
   bucket = var.s3_bucket_name_backend
