@@ -14,7 +14,10 @@ variable "aws_region" {
   default     = "ap-northeast-1"
 }
 
-
-
+variable "domain_name" {
+  description = "domain name"
+  type = string
+  default = "ksw29555-cloudresume.name"
+}
 
 

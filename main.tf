@@ -83,9 +83,29 @@ module "systems_manager" {
   source = "./modules/systems_manager"
 }
 
-# module "route53" {
-#   source = "./modules/route53"
-# }
+module "acm" {
+  source = "./modules/acm"
+  domain_name = var.domain_name
+}
+
+# s3 bucket regional domain name
+# acm certificate arn
+module "cloudfront" {
+  source = "./modules/cloudfront"
+
+  domain_name = var.domain_name
+  s3_bucket_frontend_website_endpoint = module.s3.s3_bucket_frontend_website_endpoint
+  s3_bucket_frontend_id = module.s3.s3_bucket_frontend_id
+  acm_certificate_arn = module.acm.acm_certificate_arn
+}
+
+module "route53" {
+  source = "./modules/route53"
+
+  domain_name = var.domain_name
+  cloudfront_s3_distribution_domain_name = module.cloudfront.cloudfront_s3_distribution_domain_name
+  cloudfront_s3_distribution_hosted_zone_id = module.cloudfront.cloudfront_s3_distribution_hosted_zone_id
+}
 
 
 

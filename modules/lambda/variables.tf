@@ -1,17 +1,17 @@
-
-variable "lambda_visitor_script_repository_url" {
-  description = "repository url for visitor lambda script"
+# s3 key
+variable "s3_key_visitor_script" {
+  description = "s3 key for visitor lambda script"
   type        = string
-  default     = "github.com/flamingo1332/cloud_resume_code/backend/visitor.py"
+  default     = "visitor.zip"
+}
+variable "s3_key_slack_notification_script" {
+  description = "s3 key for slack notification lambda script"
+  type        = string
+  default     = "slack_notification.zip"
 }
 
-variable "lambda_slack_notification_script_repository_url" {
-  description = "repository url for notification lambda script"
-  type        = string
-  default     = "github.com/flamingo1332/cloud_resume_code/backend/slack_notification.py"
-}
 
-
+# lambda name
 variable "lambda_visitor_name" {
   description = "name for visitor lambda script"
   type        = string
@@ -26,17 +26,19 @@ variable "lambda_slack_notification_name" {
 
 
 
-
+# bucket
 variable "s3_bucket_backend" {
   description = "s3 bucket for backend code"
   type        = string
 }
 
+# iam role for lambda
 variable "iam_role_lambda_arn" {
   description = "arn of iam lambda role"
   type        = string
 }
 
+# dynamodb name
 variable "dynamodb_visitor_table_name" {
   description = "table name of visitor dynamodb table"
   type        = string
