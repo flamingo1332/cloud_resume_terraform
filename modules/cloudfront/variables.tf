@@ -3,8 +3,8 @@ variable "domain_name" {
   type        = string
 }
 
-variable "s3_bucket_frontend_website_endpoint" {
-  description = "website endpoint of s3 frontend bucket"
+variable "s3_bucket_frontend_regional_domain_name" {
+  description = "regional domain name of s3 frontend bucket"
   type = string
 }
 

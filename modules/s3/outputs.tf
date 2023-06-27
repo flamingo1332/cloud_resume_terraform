@@ -9,9 +9,9 @@ output "s3_bucket_backend" {
 }
 
 
-output "s3_bucket_frontend_website_endpoint" {
-  description = "website endpoint of s3 frontend bucket"
-  value       = aws_s3_bucket.frontend_bucket.website_endpoint
+output "s3_bucket_frontend_regional_domain_name" {
+  description = "regional domain name of s3 frontend bucket"
+  value       = aws_s3_bucket.frontend_bucket.bucket_regional_domain_name
 }
 
 

@@ -94,7 +94,7 @@ module "cloudfront" {
   source = "./modules/cloudfront"
 
   domain_name = var.domain_name
-  s3_bucket_frontend_website_endpoint = module.s3.s3_bucket_frontend_website_endpoint
+  s3_bucket_frontend_regional_domain_name = module.s3.s3_bucket_frontend_regional_domain_name
   s3_bucket_frontend_id = module.s3.s3_bucket_frontend_id
   acm_certificate_arn = module.acm.acm_certificate_arn
 }
