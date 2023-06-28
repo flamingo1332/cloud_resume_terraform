@@ -35,9 +35,9 @@ resource "aws_route53_record" "alias_www" {
 
 
 # registered domain
-data "aws_route53domains_registered_domain" "regiestered_domain" {
-  domain_name = var.domain_name
-}
+# data "aws_route53domains_registered_domain" "regiestered_domain" {
+#   domain_name = var.domain_name
+# }
 
 resource "aws_route53domains_registered_domain" "managed_regiestered_domain" {
   domain_name = var.domain_name
