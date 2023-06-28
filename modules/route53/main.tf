@@ -1,15 +1,16 @@
 # hosted zone
-resource "aws_route53_zone" "zone" {
+data "aws_route53_zone" "zone" {
   name = var.domain_name
 }
 
-output "name_servers" {
-  value = aws_route53_zone.zone.name_servers
+resource "aws_route53_zone" "managed_zone" {
+  name = var.domain_name
 }
+
 
 # Route 53 alias record (domain_name)
 resource "aws_route53_record" "alias" {
-  zone_id = aws_route53_zone.zone.zone_id
+  zone_id = aws_route53_zone.managed_zone.zone_id
   name    = var.domain_name
   type    = "A"
 
@@ -21,7 +22,7 @@ resource "aws_route53_record" "alias" {
 }
 
 resource "aws_route53_record" "alias_www" {
-  zone_id = aws_route53_zone.zone.zone_id
+  zone_id = aws_route53_zone.managed_zone.zone_id
   name    = "www.${var.domain_name}"
   type    = "A"
 
@@ -33,16 +34,13 @@ resource "aws_route53_record" "alias_www" {
 }
 
 
-# register domain
-resource "aws_route53domains_registered_domain" "regiestered_domain" {
+# registered domain
+data "aws_route53domains_registered_domain" "regiestered_domain" {
   domain_name = var.domain_name
+}
 
-
-  auto_renew = false
-
-  admin_contact {
-    email = "ksw29555@gmail.com"  
-  }
+resource "aws_route53domains_registered_domain" "managed_regiestered_domain" {
+  domain_name = var.domain_name
 }
 
 
