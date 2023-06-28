@@ -20,8 +20,14 @@ terraform {
 
 
 provider "aws" {
-
   region     = var.aws_region
+  access_key = var.aws_access_key
+  secret_key = var.aws_secret_key
+}
+
+provider "aws" {
+  alias      = "use1"
+  region     = "us-east-1"
   access_key = var.aws_access_key
   secret_key = var.aws_secret_key
 }
@@ -85,6 +91,9 @@ module "systems_manager" {
 
 module "acm" {
   source = "./modules/acm"
+  providers = {
+    aws = aws.use1
+  }
   domain_name = var.domain_name
 }
 
