@@ -3,9 +3,6 @@ resource "aws_route53_zone" "hosted_zone" {
   name = var.domain_name
 }
 
-locals {
-  name_servers_map = { for idx, ns in aws_route53_zone.hosted_zone.name_servers : idx => ns }
-}
 
 # data "aws_route53_zone" "zone_data"{
 #   name = aws_route53_zone.hosted_zone.name
@@ -47,8 +44,10 @@ resource "aws_route53domains_registered_domain" "managed_regiestered_domain" {
 
   auto_renew = false
 
+  for_each = toset(aws_route53_zone.hosted_zone.name_servers)
+
   name_server {
-    name = aws_route53_zone.hosted_zone.primary_name_server
+    name = each.value
   }
 
 }
