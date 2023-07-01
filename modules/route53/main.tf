@@ -41,13 +41,32 @@ resource "aws_route53_record" "alias_www" {
 
 resource "aws_route53domains_registered_domain" "managed_regiestered_domain" {
   domain_name = var.domain_name
-
   auto_renew = false
 
-  for_each = toset(aws_route53_zone.hosted_zone.name_servers)
-
-  name_server {
-    name = each.value
+  admin_contact {
+    address_line_1 = "242 Ilsan-ro, Ilsandong-gu, Goyang-si, Gyeonggi-do"
+    address_line_2 = "baek-ma 607 - 401"
+    city           = "goyang"
+    contact_type   = "PERSON"
+    country_code   = "KR"
+    email          = "ksw29555@gmail.com"
+    first_name     = "sn"
+    last_name      = "k"
+    phone_number   = "+82.1036355184"
+    zip_code       = "10417"
   }
 
+
+  name_server {
+    name = aws_route53_zone.hosted_zone.name_servers[0]
+  }
+  name_server {
+    name = aws_route53_zone.hosted_zone.name_servers[1]
+  }
+  name_server {
+    name = aws_route53_zone.hosted_zone.name_servers[2]
+  }
+  name_server {
+    name = aws_route53_zone.hosted_zone.name_servers[3]
+  }
 }
