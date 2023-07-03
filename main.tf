@@ -57,6 +57,7 @@ module "lambda" {
   iam_role_lambda_arn         = module.iam.iam_role_lambda_arn
   dynamodb_visitor_table_name = module.dynamodb.dynamodb_visitor_table_name
   dynamodb_ip_table_name      = module.dynamodb.dynamodb_ip_table_name
+  apigateway_execution_arn    = module.apigateway.apigateway_execution_arn
 }
 
 

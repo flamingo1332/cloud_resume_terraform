@@ -38,4 +38,14 @@ resource "aws_lambda_function" "lambda_slack_notification" {
 }
 
 
+# api gateway integration
+resource "aws_lambda_permission" "apigateway_lambda_integration" {
+  statement_id  = "AllowMyAPIInvoke"
+  action        = "lambda:InvokeFunction"
+  function_name = var.lambda_visitor_name
+  principal     = "apigateway.amazonaws.com"
 
+  # The /* part allows invocation from any stage, method and resource path
+  # within API Gateway.
+  source_arn = "${var.apigateway_execution_arn}/*"
+}

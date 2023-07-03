@@ -47,3 +47,7 @@ variable "dynamodb_ip_table_name" {
   description = "table name of ip dynamodb table"
   type        = string
 }
+variable "apigateway_execution_arn" {
+  description = "execution arn of apigateway"
+  type        = string
+}
