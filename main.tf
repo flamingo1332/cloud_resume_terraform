@@ -14,8 +14,6 @@ terraform {
     encrypt        = true
     dynamodb_table = "cloud_resume_terraform_lock"
   }
-
-
 }
 
 
