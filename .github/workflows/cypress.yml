@@ -6,13 +6,17 @@ on:
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Install Dependencies
+        run: npm install
       
-      - name: Set up working directory
-        run: cd frontend
-        
       - name: Cypress run
         uses: cypress-io/github-action@v6
         with:
