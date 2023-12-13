@@ -6,22 +6,20 @@ on:
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: frontend
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
       - name: Install Dependencies
         run: npm install
-      
+        working-directory: ./frontend
+
       - name: Cypress run
         uses: cypress-io/github-action@v6
         with:
+          working-directory: ./frontend
           start: npm run watch
-          wait-on: 'http://localhost:3000' # Waits for above
+          wait-on: 'http://localhost:3000'
           record: true
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
