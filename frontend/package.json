@@ -1,0 +1,23 @@
+{
+  "name": "react-cv-example",
+  "version": "1.6.0",
+  "description": "Example project for react-cv",
+  "source": "index.html",
+  "dependencies": {
+    "axios": "^1.6.2",
+    "react": "^18.2.0",
+    "react-cv": "^1.6.0",
+    "react-dom": "^18.2.0"
+  },
+  "scripts": {
+    "watch": "parcel index.html --port 3000",
+    "build": "parcel build --public-url /react-cv/",
+    "cypress": "cypress open"
+  },
+  "devDependencies": {
+    "buffer": "^6.0.3",
+    "cypress": "^13.6.1",
+    "parcel": "^2.10.2",
+    "process": "^0.11.10"
+  }
+}

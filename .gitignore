@@ -23,3 +23,10 @@ terraform.tfstate*
 # notes
 TODO.txt
 PLAN.txt
+
+
+.github/workflows/deploy_aws_resources.yml
+.github/workflows/upload-to-s3.yml
+
+
+
