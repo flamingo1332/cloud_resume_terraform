@@ -2,7 +2,7 @@ const { defineConfig } = require('cypress')
 
 module.exports = defineConfig({
   e2e: {
-    projectId: 'resume',
+    projectId: 'oqdk5t',
     baseUrl: 'http://localhost:3000',
     // supportFile: 'cypress/support/index.js',
     specPattern: 'cypress/e2e/*.spec.js',
