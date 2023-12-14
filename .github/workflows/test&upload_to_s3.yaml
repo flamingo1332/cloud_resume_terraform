@@ -1,0 +1,56 @@
+name: test&upload_to_s3
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'frontend/**'
+      - 'backend/**'
+jobs:
+  test-and-upload:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      
+      # aws configuration
+      - name: Set up AWS CLI
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-northeast-1
+
+      - name: Install Dependencies
+        run: npm install
+        working-directory: frontend
+
+      - name: Cypress run
+        uses: cypress-io/github-action@v6
+        with:
+          working-directory: frontend
+          build: npm run build
+          start: npm run watch
+          wait-on: 'http://localhost:3000'
+          record: true
+          config-file: cypress.config.js
+        env:
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+
+          
+      # Zip lambda scripts
+      - name: Zip Scripts
+        run: |
+         cd backend
+         zip -r visitor.zip visitor.py
+         zip -r slack_notification.zip slack_notification.py
+
+      # upload to s3
+      - name: Upload Slack Notification Script
+        run: aws s3 cp backend/slack_notification.zip s3://ksw29555-cloud-resume-backend/
+
+      - name: Upload Visitor Script
+        run: aws s3 cp backend/visitor.zip s3://ksw29555-cloud-resume-backend/
+      
+      - name: Upload frontend React App Build to S3
+        run: aws s3 sync frontend/dist/ s3://ksw29555-cloud-resume-frontend/

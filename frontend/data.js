@@ -11,7 +11,7 @@ export const CVData = {
         { type: 'linkedin', value: 'linkedin.com' },
         // { type: 'twitter', value: 'twitter.com/sbayd' },
         { type: 'github', value: 'github.com' },
-        { type: 'website', value: 'visitors: 0' },
+        { type: 'website', value: 'visitors: 1' },
 
       ]
     },
