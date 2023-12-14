@@ -36,6 +36,7 @@ module "management" {
   lambda_visitor_arn                            = module.serveless.lambda_visitor_arn
 
   index_document = "index.html"
+  webhook_url    = "webhook_url"
 }
 
 

@@ -5,6 +5,11 @@ resource "aws_acm_certificate" "acm_certification" {
   validation_method = var.validation_method
 }
 
+data "aws_route53_zone" "hosted_zone" {
+  name         = var.domain_name
+  private_zone = false
+}
+
 
 resource "aws_route53_record" "record" {
   for_each = {
@@ -26,6 +31,7 @@ resource "aws_route53_record" "record" {
 
 
 resource "aws_acm_certificate_validation" "validation" {
+  provider                = aws.use1
   certificate_arn         = aws_acm_certificate.acm_certification.arn
   validation_record_fqdns = [for record in aws_route53_record.record : record.fqdn]
 }
