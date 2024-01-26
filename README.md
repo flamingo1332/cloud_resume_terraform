@@ -32,7 +32,7 @@ Details of the Cloud Resume Challenge can be found [here](https://cloudresumecha
 - **Cypress**: end-to-end testing of frontend react application, integrated with github actions
 
 ## Architecture
-
+![cloudresume architecture](https://github.com/flamingo1332/cloud_resume_terraform/assets/100294322/213882c8-73f7-477b-aad7-78e8f98cf323)
 This project adopts a serverless architecture to minimize operational overhead while ensuring scalability. 
 
 1. Serving the static website content through AWS S3 and CloudFront.
@@ -94,3 +94,5 @@ This project adopts a serverless architecture to minimize operational overhead w
                 variables.tf
 ```
 ## Output
+![cloudresume image](https://github.com/flamingo1332/cloud_resume_terraform/assets/100294322/dc633a63-f65c-42ed-b8a5-5099765cc576)
+
